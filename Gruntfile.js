@@ -139,8 +139,8 @@ module.exports = function(grunt) {
 	grunt.loadTasks('tasks');
 
 	grunt.registerTask('install', ['bower:install', 'tsd:install']);
-	grunt.registerTask('build', ['typescript', 'patch-sourcemap']);
-	grunt.registerTask('tests', ['typescript', 'jasmine:unit']);
-	grunt.registerTask('coverage', ['typescript', 'replace:coverage', 'jasmine:coverage']);
+	grunt.registerTask('build', ['clean', 'typescript', 'patch-sourcemap']);
+	grunt.registerTask('tests', ['build', 'jasmine:unit']);
+	grunt.registerTask('coverage', ['build', 'replace:coverage', 'jasmine:coverage']);
 	grunt.registerTask('default', ['build', 'watch']);
 }
