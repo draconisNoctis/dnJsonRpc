@@ -112,10 +112,7 @@ module dnJsonRpc {
 				if('string' === typeof response.data) {
 					return this.$q.reject(new JsonRpcResponseError(RESPONSE_ERRORS.PARSE_ERROR, 'Parse error'));
 				}
-				/**
-				 * @todo  remove, not jsonrpc 2.0 conform
-				 */
-				response.data.jsonrpc = '2.0';
+				
 				if(null === response.data.error) {
 					delete response.data.error;
 				}
@@ -145,10 +142,6 @@ module dnJsonRpc {
 				if('string' === typeof response.data) {
 					return this.$q.reject(new JsonRpcResponseError(RESPONSE_ERRORS.PARSE_ERROR, 'Parse error'));
 				}
-				/**
-				 * @todo  remove
-				 */
-				response.data.jsonrpc = '2.0';
 				if('2.0' !== response.data.jsonrpc || !('error' in response.data)) { // a === b equals !(a XOR b)
 					return this.$q.reject(new JsonRpcResponseError(RESPONSE_ERRORS.INVALID_RESPONSE, 'Invalid response'));
 				}
@@ -191,10 +184,7 @@ module dnJsonRpc {
 						if('string' === typeof response.data) {
 							return this.$q.reject(new JsonRpcResponseError(RESPONSE_ERRORS.PARSE_ERROR, 'Parse error'));
 						}
-						/**
-						 * @todo  remove
-						 */
-						response.data.jsonrpc = '2.0';
+
 						if('2.0' == response.data.jsonrpc && 'error' in response.data && 'id' in response.data) {
 							return this.$q.reject(new JsonRpcRequestError(response.data.error.code, response.data.error.message, response.data.error.data));
 						}
@@ -203,10 +193,6 @@ module dnJsonRpc {
 						}
 
 						return response.data.map(data => {
-							/**
-							 * @todo  remove
-							 */
-							data.jsonrpc = '2.0';
 							if('2.0' !== data.jsonrpc || (('result' in data) === ('error' in data)) || !('id' in data)) { // a === b equals !(a XOR b)
 								return new JsonRpcResponseError(RESPONSE_ERRORS.INVALID_RESPONSE, 'Invalid response');
 							}
