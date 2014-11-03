@@ -1,6 +1,5 @@
 /* istanbul ignore next */
 /// <reference path="../typings/angularjs/angular.d.ts" />
-// / <reference path="../typings/es6-promise/es6-promise.d.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -111,13 +110,6 @@ var dnJsonRpc;
                     return _this.$q.reject(new JsonRpcResponseError(-33700 /* PARSE_ERROR */, 'Parse error'));
                 }
 
-                /**
-                * @todo  remove, not jsonrpc 2.0 conform
-                */
-                response.data.jsonrpc = '2.0';
-                if (null === response.data.error) {
-                    delete response.data.error;
-                }
                 if ('2.0' !== response.data.jsonrpc || (('result' in response.data) === ('error' in response.data)) || !('id' in response.data)) {
                     return _this.$q.reject(new JsonRpcResponseError(-33600 /* INVALID_RESPONSE */, 'Invalid response'));
                 }
@@ -143,11 +135,6 @@ var dnJsonRpc;
                 if ('string' === typeof response.data) {
                     return _this.$q.reject(new JsonRpcResponseError(-33700 /* PARSE_ERROR */, 'Parse error'));
                 }
-
-                /**
-                * @todo  remove
-                */
-                response.data.jsonrpc = '2.0';
                 if ('2.0' !== response.data.jsonrpc || !('error' in response.data)) {
                     return _this.$q.reject(new JsonRpcResponseError(-33600 /* INVALID_RESPONSE */, 'Invalid response'));
                 }
@@ -193,10 +180,6 @@ var dnJsonRpc;
                             return _this.$q.reject(new JsonRpcResponseError(-33700 /* PARSE_ERROR */, 'Parse error'));
                         }
 
-                        /**
-                        * @todo  remove
-                        */
-                        response.data.jsonrpc = '2.0';
                         if ('2.0' == response.data.jsonrpc && 'error' in response.data && 'id' in response.data) {
                             return _this.$q.reject(new JsonRpcRequestError(response.data.error.code, response.data.error.message, response.data.error.data));
                         }
@@ -205,10 +188,6 @@ var dnJsonRpc;
                         }
 
                         return response.data.map(function (data) {
-                            /**
-                            * @todo  remove
-                            */
-                            data.jsonrpc = '2.0';
                             if ('2.0' !== data.jsonrpc || (('result' in data) === ('error' in data)) || !('id' in data)) {
                                 return new JsonRpcResponseError(-33600 /* INVALID_RESPONSE */, 'Invalid response');
                             }

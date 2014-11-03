@@ -2,11 +2,6 @@
 /// <reference path="../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../dnJsonRpc.ts" />
 describe('dnJsonRpc', function () {
-    // beforeEach(() => {
-    // 	angular.module('dnJsonRpcSpec', ['dnJsonRpc']);
-    // 	module('dnJsonRpc', 'dnJsonRpcSpec');
-    // 	inject(() => {});
-    // });
     beforeEach(module('dnJsonRpc'));
 
     describe('DnJsonRpcService', function () {

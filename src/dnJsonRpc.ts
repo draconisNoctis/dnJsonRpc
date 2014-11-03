@@ -1,6 +1,5 @@
 /* istanbul ignore next */
 /// <reference path="../typings/angularjs/angular.d.ts" />
-// / <reference path="../typings/es6-promise/es6-promise.d.ts" />
 
 module dnJsonRpc {
 
@@ -112,10 +111,7 @@ module dnJsonRpc {
 				if('string' === typeof response.data) {
 					return this.$q.reject(new JsonRpcResponseError(RESPONSE_ERRORS.PARSE_ERROR, 'Parse error'));
 				}
-				
-				if(null === response.data.error) {
-					delete response.data.error;
-				}
+
 				if('2.0' !== response.data.jsonrpc || (('result' in response.data) === ('error' in response.data)) || !('id' in response.data)) { // a === b equals !(a XOR b)
 					return this.$q.reject(new JsonRpcResponseError(RESPONSE_ERRORS.INVALID_RESPONSE, 'Invalid response'));
 				}
